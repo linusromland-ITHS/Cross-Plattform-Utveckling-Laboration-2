@@ -1,7 +1,6 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-	console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 	document.getElementById('deviceready').classList.add('ready');
 
 	getLocation();
@@ -36,7 +35,6 @@ async function getCity() {
 	const request = await fetch('https://avancera.app/cities');
 	const response = await request.json();
 
-	//get a random city
 	const city = response[Math.floor(Math.random() * response.length)];
 
 	const cityName = document.createElement('p');
