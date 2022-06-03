@@ -1,0 +1,18 @@
+{
+	"parserOptions": {
+		"ecmaVersion": 2018
+	},
+
+	"env": {
+		"es6": true,
+		"browser": true
+	},
+	"extends": ["eslint:recommended", "prettier"],
+	"root": true,
+	"rules": {
+		"no-unused-vars": ["error", { "varsIgnorePattern": "^_" }]
+	},
+	"globals": {
+		"cordova": true
+	}
+}
