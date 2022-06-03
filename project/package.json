@@ -19,12 +19,13 @@
 	},
 	"cordova": {
 		"platforms": [
-			"ios",
-			"browser"
+			"browser",
+			"ios"
 		],
 		"plugins": {
 			"cordova-plugin-geolocation": {
-				"GPS_REQUIRED": "true"
+				"GPS_REQUIRED": "true",
+				"GPS_ENABLED": "true"
 			}
 		}
 	}
