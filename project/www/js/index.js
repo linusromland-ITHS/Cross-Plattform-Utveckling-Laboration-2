@@ -4,26 +4,46 @@ function onDeviceReady() {
 	console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
 	document.getElementById('deviceready').classList.add('ready');
 
+	getLocation();
+	getCity();
+}
+
+function getLocation() {
+	const cordsElement = document.getElementById('cords');
 	const onSuccess = function (position) {
-		document.getElementById('cords').innerHTML = 'Latitude: ' + position.coords.latitude + '\n' + 'Longitude: ' + position.coords.longitude;
+		cordsElement.innerHTML = '';
+
+		const latitude = document.createElement('p');
+		latitude.innerHTML = `Latitude: ${position.coords.latitude}`;
+
+		const longitude = document.createElement('p');
+		longitude.innerHTML = `Longitude: ${position.coords.longitude}`;
+
+		cordsElement.appendChild(latitude);
+		cordsElement.appendChild(longitude);
 	};
 
 	function onError(error) {
-		alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+		cordsElement.innerHTML = 'code: ' + error.code + '\n' + 'message: ' + error.message + '\n';
 	}
-
-	async function getProjects() {
-		const request = await fetch('https://avancera.app/cities');
-		const response = await request.json();
-
-		response.forEach((city) => {
-			const cityElement = document.createElement('li');
-			// BR is very good for styling (dont give me IG)
-			cityElement.innerHTML = `Name: ${city.name}<br />Population: ${city.population}`;
-			document.getElementById('cities').appendChild(cityElement);
-		});
-	}
-
 	navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	getProjects();
+}
+
+async function getCity() {
+	const cityElement = document.getElementById('city');
+	cityElement.innerHTML = '';
+
+	const request = await fetch('https://avancera.app/cities');
+	const response = await request.json();
+
+	//get a random city
+	const city = response[Math.floor(Math.random() * response.length)];
+
+	const cityName = document.createElement('p');
+	cityName.innerHTML = `Name: ${city.name}`;
+	const cityPopulation = document.createElement('p');
+	cityPopulation.innerHTML = `Population: ${city.population}`;
+
+	cityElement.appendChild(cityName);
+	cityElement.appendChild(cityPopulation);
 }
