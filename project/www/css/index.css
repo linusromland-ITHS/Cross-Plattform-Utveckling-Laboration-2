@@ -1,0 +1,18 @@
+.event.listening {
+	display: block;
+}
+
+.event.received {
+	display: none;
+}
+
+#deviceready.ready .event.listening {
+	display: none;
+}
+#deviceready.ready .event.received {
+	display: block;
+}
+
+li {
+	margin-bottom: 1rem;
+}
